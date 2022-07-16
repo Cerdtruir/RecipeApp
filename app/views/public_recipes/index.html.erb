@@ -1,0 +1,9 @@
+<h1>Recipes</h1>
+<div id="recipes">
+  <% @recipes.each do |public_recipe| %>
+    <%= render public_recipe %>
+    <p>
+      <%= link_to "Show this recipe", 'public_recipes/' + public_recipe.id.to_s %>
+    </p>
+  <% end %>
+</div>
