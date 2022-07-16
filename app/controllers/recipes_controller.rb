@@ -5,12 +5,13 @@ class RecipesController < ApplicationController
   # GET /recipes or /recipes.json
   def index
     @user = current_user
-    @recipes = Recipe.
+    @recipes = Recipe.where(user_id: @user.id)
   end
 
   # GET /recipes/1 or /recipes/1.json
   def show
     @user = current_user
+    redirect_to recipes_path, alert: 'You are not authorized to view this recipe.' if @recipe.user_id != @user.id
   end
 
   # GET /recipes/new
@@ -52,6 +53,7 @@ class RecipesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def recipe_params
-    params.require(:recipe).permit(:name, :preparation_time, :cooking_time, :description, :public).merge(user_id: current_user.id)
+    params.require(:recipe).permit(:name, :preparation_time, :cooking_time, :description,
+                                   :public).merge(user_id: current_user.id)
   end
 end
