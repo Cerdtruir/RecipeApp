@@ -6,6 +6,7 @@ class FoodsController < ApplicationController
 
   # GET /foods/new
   def new
+    authenticate_user!
     @food = Food.new
   end
 
