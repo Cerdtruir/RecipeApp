@@ -12,6 +12,7 @@ class RecipesController < ApplicationController
   def show
     @user = current_user
     redirect_to recipes_path, alert: 'You are not authorized to view this recipe.' if @recipe.user_id != @user.id
+    @ingredients = RecipeFood.where(recipe_id: @recipe.id)
   end
 
   # GET /recipes/new

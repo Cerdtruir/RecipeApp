@@ -1,6 +1,22 @@
 <p style="color: green"><%= notice %></p>
 <%= render @recipe %>
 <div>
+  <%= link_to "Add an ingredient", new_recipe_recipe_food_path(@recipe) %>
+</div>
+<div>
+  <ul>
+    <% @ingredients.each do |ingredient| %>
+      <li> <%= ingredient.food.name %> </li>
+      <li> <%= ingredient.quantity %> <%= ingredient.food.measurement_unit %> </li>
+      <li> $<%= '%.2f' % (ingredient.food.price * ingredient.quantity) %> </li>
+      <li> <%= link_to "Edit", edit_recipe_recipe_food_path(@recipe, ingredient) %> </li>
+      <li>
+        <%= button_to "Delete", recipe_recipe_food_path(@recipe, ingredient), method: :delete, data: { confirm: "Are you sure?" } %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+<div>
   <%= link_to "Back to recipes", recipes_path %>
-  <%= button_to "Delete this recipe", @recipe, method: :delete %>
+  <%= button_to "Delete this recipe", recipe_path(@recipe), method: :delete, data: { turbo: false } %>
 </div>
