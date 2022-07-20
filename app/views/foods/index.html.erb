@@ -2,9 +2,11 @@
 <div id="foods">
   <% @foods.each do |food| %>
     <%= render food %>
-    <p>
-      <%= button_to "Delete Food", food, method: :delete, data: { turbo: false } %>
-    </p>
+    <% if food.user == current_user %>
+      <p>
+        <%= button_to "Delete Food", food, method: :delete, data: { turbo: false } %>
+      </p>
+    <% end %>
   <% end %>
 </div>
 <%= link_to "New food", new_food_path %>
