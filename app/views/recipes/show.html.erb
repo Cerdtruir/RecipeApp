@@ -8,7 +8,7 @@
     <% @ingredients.each do |ingredient| %>
       <li> <%= ingredient.food.name %> </li>
       <li> <%= ingredient.quantity %> <%= ingredient.food.measurement_unit %> </li>
-      <li> $<%= '%.2f' % (ingredient.food.price * ingredient.quantity) %> </li>
+      <li> R <%= '%.2f' % (ingredient.food.price * ingredient.quantity) %> </li>
       <li> <%= link_to "Edit", edit_recipe_recipe_food_path(@recipe, ingredient) %> </li>
       <li>
         <%= button_to "Delete", recipe_recipe_food_path(@recipe, ingredient), method: :delete, data: { confirm: "Are you sure?" } %>
