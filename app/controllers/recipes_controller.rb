@@ -5,14 +5,14 @@ class RecipesController < ApplicationController
   # GET /recipes or /recipes.json
   def index
     @user = current_user
-    @recipes = Recipe.where(user_id: @user.id)
+    @recipes = Recipe.includes(:user).where(user_id: @user.id)
   end
 
   # GET /recipes/1 or /recipes/1.json
   def show
     @user = current_user
     redirect_to recipes_path, alert: 'You are not authorized to view this recipe.' if @recipe.user_id != @user.id
-    @ingredients = RecipeFood.where(recipe_id: @recipe.id)
+    @ingredients = RecipeFood.includes(:food).where(recipe_id: @recipe.id)
   end
 
   # GET /recipes/new
@@ -49,7 +49,7 @@ class RecipesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_recipe
-    @recipe = Recipe.find(params[:id])
+    @recipe = Recipe.includes(:user).find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
