@@ -8,6 +8,6 @@
     <%= form.select :food_id, Food.where(user_id: current_user.id).map { |food| [food.name, food.id] } %>
   </div>
   <div>
-    <%= form.submit %>
+    <%= form.submit 'Save' %>
   </div>
 <% end %>
