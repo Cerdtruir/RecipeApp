@@ -3,6 +3,6 @@ class ShoppingListsController < ApplicationController
 
   # GET /shopping_lists or /shopping_lists.json
   def index
-    
+    @foods = Food.includes(recipe_foods: :recipe).all
   end
 end
