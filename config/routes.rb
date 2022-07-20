@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :public_recipes, only: %i[index show]
 
-  resources :shopping_lists, only: %i[index]
+  resources :shopping_lists, only: %i[index], path: 'shopping_list'
 
   devise_for :users, controllers: { registrations: 'users/registrations' }, path: ''
   root 'users#index'
